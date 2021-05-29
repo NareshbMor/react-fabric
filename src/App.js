@@ -1,13 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import { lazy, Suspense } from "react";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+
+const Dashboard = lazy(() => import("./components/Dashboard"));
+const Login = lazy(() => import("./components/Login"));
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Hello, NaresH MoR, Welcome to the react world!</h1>
-      </header>
+      <Router>
+
+        <Switch>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Route path="/" exact component={Dashboard} />
+            <Route path="/login" component={Login} />
+          </Suspense>
+        </Switch>
+      </Router>
     </div>
   );
 }
