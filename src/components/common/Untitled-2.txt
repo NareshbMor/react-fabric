@@ -1,0 +1,67 @@
+<script>
+    jQuery(document).ready(function($) {
+		
+    	jQuery('label.show-menu').html('<i class="fas fa-bars"></i><span class="close_menu">✕</span>');
+		$("label.show-menu").click(function(){
+		  $(this).toggleClass("active");
+		});
+			
+	
+		jQuery(".uael-post__read-more").click(function(){
+			 jQuery(this).removeAttr('href'); 
+				var idname = jQuery(this).attr('aria-labelledby');
+				var numb = idname.match(/\d/g);
+				numb = numb.join("");
+				console.log('aaaaaa', numb);
+			 jQuery(this).parent().addClass('content_block_'+numb);
+			
+			 var textname = jQuery('.content_block_'+numb+' .elementor-button-text').text();
+			if(textname == 'Read More'){
+			 jQuery('.content_block_'+numb+' .short_description').css("display", "block");
+			 jQuery('.content_block_'+numb+' .uael-post__excerpt').css("display", "none");
+			 jQuery('.content_block_'+numb+' .elementor-button-text').text("Read Less");
+			//jQuery('.content_block_'+numb+' .elementor-button-icon').html("<img src='/wp-content/uploads/2021/05/minus-icon-1.svg' class='readless'>");	
+			}
+			else{
+			 jQuery('.content_block_'+numb+' .short_description').css("display", "none");
+			 jQuery('.content_block_'+numb+' .uael-post__excerpt').css("display", "block");
+			 jQuery('.content_block_'+numb+' .elementor-button-text').text("Read More");
+			}
+			
+		});
+		
+		
+        // Button Toggle donation home page
+        $('#give-form-5628-1 button.give-btn').click( function() {
+            $('#give-form-5628-1 button.give-btn').removeClass('give-default-level');
+            $(this).addClass('give-default-level');
+        });
+		
+        // Stop Sign
+        $('#titles a').html('<img class="stop-sign" src="/wp-content/uploads/2019/06/dg-stop.png">');
+        setTimeout(function() {
+            $('.stop-sign').addClass('animated').delay('200').queue(function(){
+                $('.stop-sign').addClass('step2');
+            });
+        },400);
+    
+        // Mobile Stop Sign
+        $('.show-menu').click(function() {
+            $('.stop-sign').toggleClass('shrink');
+        });
+    
+        // Title fix
+        $('#give-form-5628-wrap h2.give-form-title').html('Join <span style="color: #BE3536">Danny</span> in this fight! Become a member today');
+    
+        // Subfooter 
+        $('#footer').append('<div class="sub-footer"><p><span style="color:#BE3536">Copyright</span> @ Coward\'s Punch Campaign 2019</p></div>');
+    
+        // Replace scrolltop button
+        $('.scrollTo_top a.rad').html('<img src="/wp-content/uploads/2019/06/up@2x.png">');
+    
+        // Media page header
+        $('.blog .entry-title').text('Like, Follow and Subscribe');
+        $('.blog .page-header .container').append('<p>Help spread the word and show your support by visiting us on our social media pages.</p>');
+    
+    });
+    </script>
