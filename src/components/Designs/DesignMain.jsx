@@ -16,15 +16,15 @@ const DesignMain = ({ ...props }) => {
         <>
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-3">
+                    {/* <div className="col-3">
                         <LeftSidebar />
                     </div>
-                    <div className="col-6">
-                        <Content1 />
-                    </div>
-                    <div className="col-3">
-                        <RigjhtSidebar />
-                    </div>
+                    <div className="col-6"> */}
+                    <Content1 />
+                    {/* </div>
+                <div className="col-3">
+                    <RigjhtSidebar />
+                </div> */}
                 </div>
             </div>
         </>

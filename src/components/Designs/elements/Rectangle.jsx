@@ -1,5 +1,8 @@
 import { fabric } from 'fabric';
 
+var getCanvas; // global variable
+var canvas = new fabric.Canvas('c');
+
 export const Ractangle = val => {
     const rect = new fabric.Rect(val);
     return rect;
