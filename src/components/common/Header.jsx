@@ -30,7 +30,7 @@ const Header = ({ ...props }) => {
                 <div className="container">
                     <div className="d-flex flex-wrap align-items-center justify-content-between">
                         <Link to="/" className="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                            <h1>Logo</h1>
+                            <h1>MoR</h1>
                         </Link>
 
                         <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
