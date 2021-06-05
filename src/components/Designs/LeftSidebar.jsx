@@ -3,77 +3,146 @@ import { addCircle, addRectangle, addLine, clearAll } from "../../redux/actions/
 
 import { fabric } from 'fabric';
 import { addTriangle } from "./Content1";
+import { useGlobal } from "../config/global";
 
 
 
 const LeftSidebar = () => {
+    const { valGlobal } = useGlobal();
     const dispatch = useDispatch();
+
     //var getCanvas; // global variable
     //  var canvas = new fabric.Canvas('c');
+    let canvas = valGlobal.canvas
+
+
+
 
     const addTriangle = () => {
-        //  console.log("triangle=>", canvas)
-        const triangle = new fabric.Rect({
+        // console.log("triangle=>", canvas)
+        const triangle = new fabric.Triangle({
             width: 200,
             height: 200,
-            fill: 'white',
-            left: 300,
+            fill: 'blue',
+            left: 50,
             top: 300,
         });
-        //   canvas.add(triangle);
-        //   canvas.renderAll();
+        canvas.add(triangle);
+        canvas.renderAll();
+
     }
 
-    const circleProps = {
-        name: 'Circle',
-        props: {
+    const addCircle = () => {
+        const circle = new fabric.Circle({
             top: 10,
             left: 100,
-            radius: 50,
+            radius: 100,
             stroke: 'blue',
             strokeWidth: 2,
             fill: '#eef',
-            scaleY: 0.5
-        }
+            scaleY: 1,
+        });
+        canvas.add(circle);
+        canvas.renderAll();
+
     }
-    const rectangleProps = {
-        name: 'Rect',
-        props: {
+    const addRectangle = () => {
+        const rectangle = new fabric.Rect({
             width: 200,
             height: 200,
-            fill: 'white',
+            fill: 'green',
             left: 300,
             top: 300,
-            // selectable: false,
-            //excludeFromExport: true,
-        }
+        });
+        canvas.add(rectangle);
+        canvas.renderAll();
     }
-    const lineProps = {
-        name: 'Line',
-        props: {
-            width: 10,
-            height: 20,
-            left: 100,
-            top: 100,
-            fill: 'yellow',
-            stroke: 'red',
-            strokeWidth: 5,
-            selectable: false,
-            evented: false,
-        }
+
+    const clearAll = () => {
+        //canvas.clear()
+        canvas.remove(...canvas.getObjects());
     }
+
+    const addText = () => {
+        const addtext = new fabric.IText('Hello Mor', { left: 30, top: 20, fill: '#000', fontSize: 30 });
+        canvas.add(addtext);
+        canvas.renderAll();
+    }
+
+    const addImage = () => {
+        let userImage = 'https://freshtrends.in/wp-content/uploads/2020/05/fresh-trends-logo.png';
+        fabric.Image.fromURL(userImage, function (img) {
+            img.set({
+                scaleX: 0.25,
+                scaleY: 0.25,
+                top: 200,
+                left: 50
+            });
+            canvas.add(img);
+            canvas.renderAll();
+        });
+    }
+
+
+    const deleteSelected = () => {
+        console.log("getActiveObject=>", canvas.getActiveObject())
+        canvas.on('selection:cleared', function (obj) {
+            console.log("selection=>", obj.target)
+        });
+        canvas.remove(canvas.getActiveObject());
+    }
+
+    const addUploadImage = (e) => {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+            var img = new Image();
+            img.onload = function () {
+                var imgInstance = new fabric.Image(img, {
+                    scaleX: 0.2,
+                    scaleY: 0.2,
+                    // top: 0,
+                    // left: 0,
+                    // angle: 0,
+                    // hasBorders: false,
+                    // cornerSize: 0,
+                    // lockRotation: true
+                })
+                canvas.add(imgInstance);
+            }
+            img.src = event.target.result;
+        }
+        reader.readAsDataURL(e.target.files[0]);
+    }
+
+    const getEvents = (e) => {
+        console.log("getEvents=>", e)
+    }
+
     return (
         <div>
             <h1>LeftSidebar</h1>
-            <div className="btn-group" role="group" aria-label="Basic outlined example">
-                <button type="button" onClick={() => dispatch(addCircle(circleProps))} className="btn btn-outline-primary">Circle</button>
-                <button type="button" onClick={() => dispatch(addRectangle(rectangleProps))} className="btn btn-outline-primary">Rectangle</button>
-                <button type="button" onClick={() => dispatch(addLine(lineProps))} className="btn btn-outline-primary">Line</button>
+
+            <div>
+
+                <div className="btn-group" role="group" aria-label="Basic outlined example">
+                    <button type="button" onClick={() => addCircle()} className="btn btn-outline-primary">Circle</button>
+                    <button type="button" onClick={() => addRectangle()} className="btn btn-outline-primary">Rectangle</button>
+                    <button type="button" onClick={() => addTriangle()} className="btn btn-outline-primary">Add Triangle</button>
+
+                </div>
+                <div className="btn-group" role="group" aria-label="Basic outlined example">
+                    <button type="button" onClick={() => addText()} className="btn btn-outline-primary">Text</button>
+                    <button type="button" onClick={() => addImage()} className="btn btn-outline-primary">Add Image</button>
+
+                </div>
+                <input type="file" onChange={(e) => addUploadImage(e)} className="btn btn-outline-primary" />
+
+                <button type="button" onClick={() => deleteSelected()} className="btn btn-outline-primary">Delete Seleted</button>
+                <button type="button" onClick={() => clearAll()} className="btn btn-outline-primary">Clear All</button>
+
+                {/* <button type="button" onClick={() => changeColor()} className="btn btn-outline-primary">Change Color</button> */}
+
             </div>
-
-            <button type="button" onClick={() => dispatch(clearAll())} className="btn btn-outline-primary">Clear All</button>
-
-            <button type="button" onClick={() => addTriangle()} className="btn btn-outline-primary">Add Triangle</button>
         </div>
     );
 };

@@ -9,12 +9,6 @@ const Content1 = () => {
     const dispatch = useDispatch();
     // const canvasRef = useRef(null);
     // console.log("designElements =>", canvasRef)
-
-
-
-
-
-
     // canvas.on('selection:updated', function (e) {
     //     console.log("selectedselectedselected => ", canvas.getActiveObject())
     // }); 
@@ -24,7 +18,7 @@ const Content1 = () => {
 
         canvas = new fabric.Canvas('c', {
             backgroundColor: 'red',
-            selectionColor: 'lightGrey',
+            selectionColor: 'black',
             selectionLineWidth: 2,
             width: 600,
             height: 600,
@@ -260,9 +254,9 @@ const Content1 = () => {
                     </canvas>
                 </div>
             </div>
-            <div className="col-3">
+            {/* <div className="col-3">
                 <h1>RightSidebar</h1>
-            </div>
+            </div> */}
         </Fragment >
     );
 };
