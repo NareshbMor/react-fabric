@@ -115,6 +115,7 @@ const LeftSidebar = () => {
     }
 
     const getEvents = (e) => {
+        // get the event 
         console.log("getEvents=>", e)
     }
 
